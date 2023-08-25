@@ -1,10 +1,21 @@
 <?php $activePage = 'produk'; ?>
 <?php include 'header.php' ?>
 <?php include '../controller/func.php' ?>
-<?php $produkData = getProdukWithGallery(); ?>
-<?php var_dump($produkData) ?>
+
+<?php 
+/**
+ * Retrieves the product data along with its gallery.
+ *
+ * @return array An array containing the product data along with its gallery.
+ */
+$produkData = getProdukWithGallery(); ?>
 <div class="container mt-5">
     <div class="d-flex align-content-start d-flex justify-content-between flex-wrap">
+        <!-- /**
+         * This code block loops through the $produkData array and checks if the current $produk['id_class'] is different from the previous one.
+         * If it is different, it assigns the current $produk['id_class'] to $prevIdClass variable.
+         * This is useful for grouping the products by class in the HTML output.
+         */ -->
         <?php $prevIdClass = null; ?>
         <?php foreach ($produkData as $produk) : ?>
             <?php if ($prevIdClass !== $produk['id_class']) : ?>
