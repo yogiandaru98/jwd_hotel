@@ -44,6 +44,20 @@ function getProduk(){
     return $data;
 }
 
+/**
+ * Inserts a new order into the database.
+ *
+ * @param int $id_class The ID of the room class.
+ * @param string $name The name of the customer.
+ * @param string $gender The gender of the customer.
+ * @param string $num_identity The identity number of the customer.
+ * @param string $order_date The date of the order.
+ * @param int $duration The duration of the stay.
+ * @param string $breakfast The breakfast option. Default is "Tidak".
+ * @param float $total_price The total price of the order.
+ * @param float $discount The discount amount. Default is 0.
+ * @return bool Returns true on success, false on failure.
+ */
 function insertOrder(
     $id_class,
     $name,
@@ -51,17 +65,51 @@ function insertOrder(
     $num_identity,
     $order_date,
     $duration,
-    $breakfast = "Tidak",
-    $total_price,
-    $discount = 0
-    ){
+    $total_price, // Parameter required
+    $breakfast = "Tidak", // Parameter opsional
+    $discount = 0 // Parameter opsional
+) {
     global $conection;
-    $query = "INSERT INTO orders VALUES (NULL, '$id_class', '$name', '$gender', '$num_identity', '$order_date', '$duration', '$breakfast', '$total_price', '$discount')";
-    $result = mysqli_query($conection, $query);
+    $classExist = id_classExist($id_class);
+    if (!$classExist) {
+        return false;
+    }
+
+    $query = "INSERT INTO `order` (`id_class`, `name`, `gender`, `num_identity`, `order_date`, `duration`, `breakfast`, `total_price`, `discount`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = mysqli_prepare($conection, $query);
+    mysqli_stmt_bind_param($stmt, "issssisdd", $id_class, $name, $gender, $num_identity, $order_date, $duration, $breakfast, $total_price, $discount);
+    
+    $result = mysqli_stmt_execute($stmt);
+    if (!$result) {
+        echo "Error: " . mysqli_error($conection); // Print the error message for debugging
+    }
+
     return $result;
+}
+
+
+
+function id_classExist($id_class){
+    global $conection;
+    $query = "SELECT * FROM class WHERE id = '$id_class'";
+    $result = mysqli_query($conection, $query);
+    
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else {
+        return false;
+    }
 
 }
 
+/**
+ * Returns the price of a hotel room based on its class ID.
+ *
+ * @param int $id_class The ID of the hotel room class.
+ * @return mixed Returns the price of the hotel room if successful, otherwise returns "Error".
+ */
 function getHargaBasedOnClass($id_class) {
     global $conection; 
 
@@ -78,6 +126,14 @@ function getHargaBasedOnClass($id_class) {
 
 
 
+/**
+ * Calculates the total price of a hotel room based on its class, duration of stay, and breakfast option.
+ *
+ * @param int $id_class The ID of the hotel room class.
+ * @param int $duration The duration of stay in days.
+ * @param string $breakfast The breakfast option, either "Ya" or "Tidak". Defaults to "Tidak".
+ * @return float The total price of the hotel room.
+ */
 function totalPrice(
     $id_class,
     $duration,
@@ -100,6 +156,8 @@ function totalPrice(
     }
 
 }
+
+
 
 
 

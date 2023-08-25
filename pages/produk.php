@@ -1,6 +1,6 @@
 <?php $activePage = 'produk'; ?>
-<?php include 'header.php' ?>
-<?php include '../controller/func.php' ?>
+<?php include 'header.php'; ?>
+<?php include '../controller/func.php'; ?>
 
 <?php 
 /**
@@ -8,19 +8,16 @@
  *
  * @return array An array containing the product data along with its gallery.
  */
-$produkData = getProdukWithGallery(); ?>
+$produkData = getProdukWithGallery();
+?>
+
 <div class="container mt-5">
     <div class="d-flex align-content-start d-flex justify-content-between flex-wrap">
-        <!-- /**
-         * This code block loops through the $produkData array and checks if the current $produk['id_class'] is different from the previous one.
-         * If it is different, it assigns the current $produk['id_class'] to $prevIdClass variable.
-         * This is useful for grouping the products by class in the HTML output.
-         */ -->
-        <?php $prevIdClass = null; ?>
+        <?php $loadedIdClasses = array(); ?>
         <?php foreach ($produkData as $produk) : ?>
-            <?php if ($prevIdClass !== $produk['id_class']) : ?>
-                <?php $prevIdClass = $produk['id_class']; ?>
-
+            <?php if (!in_array($produk['id_class'], $loadedIdClasses)) : ?>
+                <?php $loadedIdClasses[] = $produk['id_class']; ?>
+                
                 <div class="card m-2" style="width: 300px; height: 310px;">
                     <div id="myCarousel-<?php echo $produk['id_class']; ?>" class="carousel slide" data-ride="carousel" style="width: 300px; height: 200px;">
 
@@ -57,4 +54,5 @@ $produkData = getProdukWithGallery(); ?>
         <?php endforeach; ?>
     </div>
 </div>
-<?php include 'footer.php' ?>
+
+<?php include 'footer.php'; ?>

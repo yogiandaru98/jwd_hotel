@@ -11,6 +11,7 @@
                 <?php if ($_GET["status"] === "success") : ?>
                     <div class="alert alert-success" role="alert">
                         Order berhasil! Terima kasih atas pesanannya.
+                        <?php  ?>
                     </div>
                 <?php elseif ($_GET["status"] === "failed") : ?>
                     <div class="alert alert-danger" role="alert">
@@ -76,6 +77,7 @@
                         <div class="alert alert-danger" role="alert">
                             <?php echo $error["order_date"]; ?>
                         </div>
+                    <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <label for="duration">Durasi Menginap</label>
@@ -88,7 +90,7 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="breakfast" name="breakfast" value="yes">
+                        <input class="form-check-input" type="checkbox" id="breakfast" name="breakfast" value="Ya">
                         <label class="form-check-label" for="breakfast">Termasuk Breakfast</label>
                     </div>
                 </div>
@@ -250,5 +252,4 @@
         }
     }
 </script>
-
 <?php include 'footer.php'; ?>
