@@ -90,6 +90,12 @@ function insertOrder(
 
 
 
+/**
+ * Checks if a class with the given ID exists in the database.
+ *
+ * @param int $id_class The ID of the class to check.
+ * @return mixed Returns an associative array containing the class information if it exists, or false otherwise.
+ */
 function id_classExist($id_class){
     global $conection;
     $query = "SELECT * FROM class WHERE id = '$id_class'";
@@ -101,7 +107,6 @@ function id_classExist($id_class){
     } else {
         return false;
     }
-
 }
 
 /**
@@ -157,6 +162,11 @@ function totalPrice(
 
 }
 
+/**
+ * Retrieves all orders with their corresponding class information.
+ *
+ * @return array An array of orders with their corresponding class information.
+ */
 function getAllOrderWithClass(){
     global $conection;
     $sql = "SELECT `order`.*, class.name as class_name, class.price as class_price
