@@ -78,12 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif(!in_array($breakfast, ['Ya', 'Tidak'])){
         $error[] = "Sarapan tidak valid";
     }
-    if(empty($discount)){
-        $error[] = "Diskon tidak boleh kosong";
-    } //diskon hanya boleh 0 atau 0.1
-    elseif(!in_array($discount, [0, 0.1])){
-        $error[] = "Diskon tidak valid";
-    }
     //jika tidak ada error
     if (count($error) > 0) {
         // Encode the error messages as a URL parameter
