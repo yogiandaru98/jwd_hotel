@@ -1,4 +1,4 @@
-<footer class="bg-light py-4" style="margin-top: 30%;">
+<footer class="bg-light py-4" style="margin-top: 35%;">
         <div class="container text-center">
             <p>&copy; <?php echo date("Y"); ?> Hotel JWD. All rights reserved.</p>
         </div>

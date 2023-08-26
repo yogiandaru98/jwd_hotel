@@ -2,7 +2,6 @@
 <?php include 'header.php' ?>
 <?php include '../controller/func.php' ?>
 <?php $produk = getProduk() ?>
-
 <div class="container mt-5">
     <table class="table table-striped table-bordered">
         <tr>

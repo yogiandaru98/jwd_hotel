@@ -157,6 +157,22 @@ function totalPrice(
 
 }
 
+function getAllOrderWithClass(){
+    global $conection;
+    $sql = "SELECT `order`.*, class.name as class_name, class.price as class_price
+    FROM `order`
+    INNER JOIN class ON `order`.id_class = class.id";
+    $result = mysqli_query($conection, $sql);
+    $rows = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+
+    return $rows;
+}
+
+
 
 
 

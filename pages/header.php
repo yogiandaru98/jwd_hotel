@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link <?php if ($activePage == 'pesan') echo 'active'; ?>" href="order.php">Pesan Kamar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($activePage == 'pemesan') echo 'active'; ?>" href="pemesan.php">Pemesan</a>
+                    </li>
                 </ul>
             </div>
         </div>
